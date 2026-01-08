@@ -64,3 +64,6 @@ This project demonstrates full-stack development skills (frontend, backend, data
 - /server — Express backend
 - /models, /routes, /controllers — backend structure
 - /components, /pages — frontend structure
+
+## Contact
+For questions or help, open an issue or contact the project maintainer.
