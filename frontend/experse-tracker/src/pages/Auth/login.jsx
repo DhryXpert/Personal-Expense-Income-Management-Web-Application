@@ -20,7 +20,9 @@ const Login = () => {
         return;
     }
 
-    if (!validateEmail(email)) {
+    if (!validateEmail(email
+      
+    )) {
       setError("Please enter a valid email address.");
       return;
     }
