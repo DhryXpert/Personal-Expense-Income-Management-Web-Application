@@ -6,6 +6,9 @@ frontend/text.js
 backend/uploads/*
 !backend/uploads/.gitkeep
 
+backend/downloads/*
+!backend/downloads/.gitkeep
+
 
 checkpoints.xlsx
 checkpoints.txt
