@@ -3,4 +3,11 @@ node_modules
 dist
 build
 frontend/text.js
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+
 checkpoints.xlsx
+checkpoints.txt
+error.log
+temp.txt
