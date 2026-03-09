@@ -3,6 +3,8 @@ import AuthLayout from "../../components/layouts/AuthLayout";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/Inputs/input";
 import { validateEmail } from "../../utils/helper";
+import axiosInstance from "../../utils/axioInstance";
+import { API_PATHS } from "../../utils/apiPaths";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,13 +18,11 @@ const Login = () => {
     e.preventDefault();
 
     if (!email) {
-        setError("Please enter the email address");
-        return;
+      setError("Please enter the email address");
+      return;
     }
 
-    if (!validateEmail(email
-      
-    )) {
+    if (!validateEmail(email)) {
       setError("Please enter a valid email address.");
       return;
     }
@@ -35,6 +35,26 @@ const Login = () => {
     setError("");
 
     //Login API call
+    try {
+      const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
+        email,
+        password,
+      });
+      const { token, user } = response.data;
+
+      if (token) {
+        localStorage.setItem("token", token);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else if (error.code === "ERR_NETWORK" || !error.response) {
+        setError("Network Error: Is the backend server running?");
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    }
   };
 
   return (

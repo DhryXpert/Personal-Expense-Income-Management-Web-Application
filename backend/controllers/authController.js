@@ -60,9 +60,7 @@ exports.loginUser = async (req, res) => {
       token: generateToken(user._id),
     });
   } catch (err) {
-    res
-      .status(500)
-      .json({ message: "Error registering user", error: err.message });
+    res.status(500).json({ message: "Error logging in", error: err.message });
   }
 };
 
