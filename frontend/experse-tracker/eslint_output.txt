@@ -1,0 +1,47 @@
+
+D:\Visual_Stdio\Projects\Personal-Expense-Income-Management-Web-Application\frontend\experse-tracker\src\components\Dashboard\Last30DaysExpenses.jsx
+  10:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+   8 |   useEffect(() => {
+   9 |     const result = prepareExpenseBarChartData(data);
+> 10 |     setChartData(result);
+     |     ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  11 |
+  12 |     return () => {};
+  13 |   }, [data]);  react-hooks/set-state-in-effect
+
+D:\Visual_Stdio\Projects\Personal-Expense-Income-Management-Web-Application\frontend\experse-tracker\src\components\Dashboard\RecentIncomeWithChart.jsx
+  19:5  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  17 |
+  18 |   useEffect(() => {
+> 19 |     prepareChartData();
+     |     ^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  20 |
+  21 |     return () => {};
+  22 |   }, [data]);  react-hooks/set-state-in-effect
+  22:6  warning  React Hook useEffect has a missing dependency: 'prepareChartData'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         react-hooks/exhaustive-deps
+
+D:\Visual_Stdio\Projects\Personal-Expense-Income-Management-Web-Application\frontend\experse-tracker\src\context\userContext.jsx
+  3:14  error  Fast refresh only works when a file only exports components. Move your React context(s) to a separate file  react-refresh/only-export-components
+
+D:\Visual_Stdio\Projects\Personal-Expense-Income-Management-Web-Application\frontend\experse-tracker\src\hooks\useUserAuth.jsx
+  37:6  warning  React Hook useEffect has a missing dependency: 'user'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\Visual_Stdio\Projects\Personal-Expense-Income-Management-Web-Application\frontend\experse-tracker\src\pages\Dashboard\Home.jsx
+  48:6  warning  React Hook useEffect has a missing dependency: 'fetchDashboardData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+✖ 6 problems (3 errors, 3 warnings)
+
