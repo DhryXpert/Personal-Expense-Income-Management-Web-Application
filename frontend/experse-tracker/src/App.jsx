@@ -11,6 +11,7 @@ import SignUp from "./pages/Auth/SignUp";
 import Home from "./pages/Dashboard/Home";
 import Income from "./pages/Dashboard/Income";
 import Expense from "./pages/Dashboard/Expense";
+import AiChat from "./pages/Dashboard/AiChat";
 import UserProvider from "./context/userContext";
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
             <Route path="/home" exact element={<Home />} />
             <Route path="/income" exact element={<Income />} />
             <Route path="/expense" exact element={<Expense />} />
+            <Route path="/ai-chat" exact element={<AiChat />} />
           </Routes>
         </Router>
       </div>
