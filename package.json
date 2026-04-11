@@ -1,0 +1,9 @@
+{
+  "name": "personal-expense-tracker-root",
+  "version": "1.0.0",
+  "scripts": {
+    "frontend": "cd frontend/experse-tracker && npm run dev",
+    "backend": "cd backend && npm run dev",
+    "dev": "npx concurrently \"npm run frontend\" \"npm run backend\""
+  }
+}

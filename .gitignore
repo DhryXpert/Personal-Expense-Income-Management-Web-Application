@@ -10,8 +10,8 @@ backend/downloads/*
 !backend/downloads/.gitkeep
 
 
-checkpoints.xlsx
 checkpoints.txt
 error.log
 temp.txt
 docs
+.megaignore
