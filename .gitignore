@@ -12,6 +12,6 @@ backend/downloads/*
 
 checkpoints.txt
 error.log
-temp.txt
 docs
 .megaignore
+vercel.txt
