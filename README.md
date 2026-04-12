@@ -56,7 +56,7 @@ Personal-Expense-Income-Management-Web-Application/
 │   ├── server.js             # Entry point for the Node.js application
 │   └── package.json          # Backend dependencies
 │
-└── frontend/experse-tracker/ # Client-side React application
+└── frontend/expense-tracker/ # Client-side React application
     ├── public/               # Static assets
     ├── src/                  # React components, pages, context, styles
     ├── vite.config.js        # Vite configuration
@@ -104,10 +104,10 @@ Personal-Expense-Income-Management-Web-Application/
 3. **Frontend Setup:**
    Open a new terminal window:
    ```bash
-   cd frontend/experse-tracker
+   cd frontend/expense-tracker
    npm install
    ```
-   Create a `.env` file in the `frontend/experse-tracker` directory if required, configuring the API URL (e.g., `VITE_API_URL=http://localhost:5000/api`).
+   Create a `.env` file in the `frontend/expense-tracker` directory if required, configuring the API URL (e.g., `VITE_API_URL=http://localhost:5000/api`).
    Start the Vite development server:
    ```bash
    npm run dev
