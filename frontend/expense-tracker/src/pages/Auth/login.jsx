@@ -11,6 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { updateUser } = useContext(UserContext);
 
@@ -36,6 +37,7 @@ const Login = () => {
     }
 
     setError("");
+    setIsLoading(true);
 
     //Login API call
     try {
@@ -58,6 +60,8 @@ const Login = () => {
       } else {
         setError("Something went wrong. Please try again.");
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -94,8 +98,8 @@ const Login = () => {
 
           {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
 
-          <button type="submit" className="btn-primary">
-            LOGIN
+          <button type="submit" className="btn-primary" disabled={isLoading}>
+            {isLoading ? "Logging In..." : "LOGIN"}
           </button>
 
           <p className="text-[13px] text-slate-800 mt-3">
