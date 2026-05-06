@@ -66,9 +66,23 @@ exports.downloadIncomeExcel = async (req, res) => {
     const wb = xlsx.utils.book_new();
     const ws = xlsx.utils.json_to_sheet(data);
     xlsx.utils.book_append_sheet(wb, ws, "Income");
-    xlsx.writeFile(wb, "Downloads/income_details.xlsx");
-    res.download("Downloads/income_details.xlsx");
+    
+    // Generate buffer instead of writing to file
+    const buffer = xlsx.write(wb, { type: "buffer", bookType: "xlsx" });
+
+    // Set headers for download
+    res.setHeader(
+      "Content-Disposition",
+      "attachment; filename=income_details.xlsx"
+    );
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+
+    res.send(buffer);
   } catch (error) {
+    console.error("Download Error:", error);
     res.status(500).json({ message: "Server Error" });
   }
 };

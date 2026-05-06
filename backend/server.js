@@ -21,6 +21,10 @@ app.use(
 
 app.use(express.json());
 
+app.get("/health", (req, res) => {
+  res.send("OK");
+});
+
 connectDB();
 
 app.use("/api/v1/auth", authRoutes);
