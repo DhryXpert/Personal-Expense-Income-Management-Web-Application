@@ -85,7 +85,7 @@ sequenceDiagram
     participant BE as Express Backend
     participant GemE as Gemini Embedding API
     participant DB as MongoDB Atlas
-    participant GemL as Gemini LLM (gemini-3.5-flash)
+    participant GemL as Gemini LLM (gemini-3.1-flash-lite)
 
     User->>FE: Types "How can I save more?"
     FE->>BE: POST /api/v1/chat/message (Body: message, history)
