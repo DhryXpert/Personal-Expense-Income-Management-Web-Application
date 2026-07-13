@@ -13,25 +13,28 @@ import Income from "./pages/Dashboard/Income";
 import Expense from "./pages/Dashboard/Expense";
 import AiChat from "./pages/Dashboard/AiChat";
 import UserProvider from "./context/userContext";
+import { ThemeProvider } from "./context/ThemeContext";
 
 const App = () => {
   return (
-    <UserProvider>
-      <div>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Root />} />
-            <Route path="/login" exact element={<Login />} />
-            <Route path="/signUp" exact element={<SignUp />} />
-            <Route path="/dashboard" exact element={<Home />} />
-            <Route path="/home" exact element={<Home />} />
-            <Route path="/income" exact element={<Income />} />
-            <Route path="/expense" exact element={<Expense />} />
-            <Route path="/ai-chat" exact element={<AiChat />} />
-          </Routes>
-        </Router>
-      </div>
-    </UserProvider>
+    <ThemeProvider>
+      <UserProvider>
+        <div>
+          <Router>
+            <Routes>
+              <Route path="/" element={<Root />} />
+              <Route path="/login" exact element={<Login />} />
+              <Route path="/signUp" exact element={<SignUp />} />
+              <Route path="/dashboard" exact element={<Home />} />
+              <Route path="/home" exact element={<Home />} />
+              <Route path="/income" exact element={<Income />} />
+              <Route path="/expense" exact element={<Expense />} />
+              <Route path="/ai-chat" exact element={<AiChat />} />
+            </Routes>
+          </Router>
+        </div>
+      </UserProvider>
+    </ThemeProvider>
   );
 };
 
