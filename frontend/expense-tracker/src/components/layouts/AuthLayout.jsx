@@ -1,11 +1,15 @@
 import React from "react";
 import CARD_2 from "../../assets/Images/card2.png";
-import {LuTrendingUpDown} from "react-icons/lu"
+import { LuTrendingUpDown } from "react-icons/lu";
+import ThemeToggle from "../ThemeToggle";
 
 const AuthLayout = ({children}) => {
     return <div className="flex">
-            <div className="w-screen h-screen md:w-[60vw] px-12 pt-8 pb-12">
-                <h2 className="text-lg font-medium text-black">Zen Wealth</h2>
+            <div className="w-screen h-screen md:w-[60vw] px-12 pt-8 pb-12 relative">
+                <div className="flex justify-between items-center mb-6">
+                    <h2 className="text-lg font-medium text-black">Zen Wealth</h2>
+                    <ThemeToggle />
+                </div>
                 {children}
             </div>
 
@@ -42,7 +46,7 @@ const StatsInfoCard = ({ icon, label, value, color }) => {
             </div>
             <div>
                 <h6 className="text-xs test-gray-500 mb-1">{label}</h6>
-                <span className="text-[20px]">${value}</span>
+                <span className="text-[20px]">₹{value}</span>
             </div>
         </div> 
 };

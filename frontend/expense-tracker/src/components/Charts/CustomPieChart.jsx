@@ -48,7 +48,8 @@ const CustomPieChart = ({
               dy={-10}
               textAnchor="middle"
               dominantBaseline="middle"
-              fill="#666"
+              fill="currentColor"
+              className="text-gray-500"
               fontSize="14px"
             >
               {label}
@@ -59,7 +60,8 @@ const CustomPieChart = ({
               dy={15}
               textAnchor="middle"
               dominantBaseline="middle"
-              fill="#1A1B1D"
+              fill="currentColor"
+              className="text-black"
               fontSize="24px"
               fontWeight="700"
             >
