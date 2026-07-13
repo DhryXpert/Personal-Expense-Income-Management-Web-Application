@@ -1,6 +1,6 @@
 const xlsx = require("xlsx");
 const Income = require("../models/Income");
-// const User = require("../models/User");
+const { addTransactionEmbedding } = require("../config/vectorStore");
 // Add Income Source
 exports.addIncome = async (req, res) => {
   const userId = req.user.id;
@@ -23,6 +23,7 @@ exports.addIncome = async (req, res) => {
 
     await newIncome.save();
     res.status(200).json(newIncome);
+    addTransactionEmbedding(newIncome, "income").catch(() => {});
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
   }

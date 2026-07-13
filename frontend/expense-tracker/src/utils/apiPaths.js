@@ -25,4 +25,8 @@ export const API_PATHS = {
   IMAGE: {
     UPLOAD_IMAGE: "/api/v1/auth/upload-image",
   },
+  CHAT: {
+    SEND_MESSAGE: "/api/v1/chat/message",
+    SYNC: "/api/v1/chat/sync",
+  },
 };
