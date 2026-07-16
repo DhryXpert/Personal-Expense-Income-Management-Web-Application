@@ -43,7 +43,7 @@ graph TD
 ```
 
 ### 1. Transaction Event & Embedding Pipeline
-Whenever a transaction is created, it is automatically formatted and embedded in the background:
+Whenever a transaction is created, it is formatted and embedded:
 
 ```mermaid
 sequenceDiagram
@@ -58,17 +58,16 @@ sequenceDiagram
     FE->>BE: POST /api/v1/expenses or /api/v1/incomes
     BE->>DB: Save transaction details (without embedding)
     DB-->>BE: Saved document returned
-    BE-->>FE: HTTP 201 Created (Instant User Feedback)
-
-    Note over BE,Gem: Background Fire-and-Forget Process Starts
 
     rect rgb(240, 248, 255)
         BE->>BE: Format transaction string: <br/> "TYPE | DATE | CATEGORY/SOURCE | AMOUNT | ICON"
         BE->>Gem: Generate 768-dim Embedding Vector
         Gem-->>BE: Return Vector Array (768 Floats)
         BE->>DB: Update document by ID (Add 'embedding' field)
-        DB->>DB: MongoDB Atlas indexes vector automatically
+        DB-->>BE: MongoDB updates successfully
     end
+
+    BE-->>FE: HTTP 200 Created
 ```
 
 * **Text Formatting**: Transactions are transformed into standard signatures: `EXPENSE | 2026-07-13 | food | 500 | 🍔`

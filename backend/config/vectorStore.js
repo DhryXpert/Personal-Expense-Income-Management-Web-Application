@@ -120,7 +120,7 @@ async function fallbackFetchRecentTransactions(userId, days = 30) {
 
 // ── Sync existing transactions (on-demand, first chat use) ─────────
 // Only embeds transactions that don't already have an embedding field
-async function syncUserTransactions(userId) {
+async function syncUserTransactions(userId, limit = 5) {
   try {
     const [expenses, incomes] = await Promise.all([
       Expense.find({ userId, embedding: { $exists: false } }),
@@ -132,27 +132,24 @@ async function syncUserTransactions(userId) {
       ...incomes.map((i) => ({ doc: i, type: "income" })),
     ];
 
-    if (allUnsynced.length === 0) return { synced: 0 };
+    const totalUnsynced = allUnsynced.length;
+    if (totalUnsynced === 0) return { synced: 0, remaining: 0 };
 
-    // Process in batches of 5 to avoid rate limiting
-    const BATCH_SIZE = 5;
-    let synced = 0;
-    for (let i = 0; i < allUnsynced.length; i += BATCH_SIZE) {
-      const batch = allUnsynced.slice(i, i + BATCH_SIZE);
-      await Promise.all(
-        batch.map(({ doc, type }) => addTransactionEmbedding(doc, type))
-      );
-      synced += batch.length;
-      // Small delay between batches to respect rate limits
-      if (i + BATCH_SIZE < allUnsynced.length) {
-        await new Promise((resolve) => setTimeout(resolve, 200));
-      }
-    }
+    // Slice to the batch limit to process in this request
+    const toSync = allUnsynced.slice(0, limit);
 
-    return { synced };
+    // Process this batch in parallel
+    await Promise.all(
+      toSync.map(({ doc, type }) => addTransactionEmbedding(doc, type))
+    );
+
+    const synced = toSync.length;
+    const remaining = totalUnsynced - synced;
+
+    return { synced, remaining };
   } catch (err) {
     console.error("[VectorStore] Sync failed:", err.message);
-    return { synced: 0 };
+    return { synced: 0, remaining: 0 };
   }
 }
 

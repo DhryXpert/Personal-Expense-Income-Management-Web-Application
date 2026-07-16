@@ -81,8 +81,8 @@ exports.sendMessage = async (req, res) => {
       return res.status(400).json({ message: "Message is required" });
     }
 
-    // 1. Sync existing transactions on first use (non-blocking check)
-    syncUserTransactions(userId).catch(() => {});
+    // 1. Sync existing transactions on first use (blocking check)
+    await syncUserTransactions(userId);
 
     // 2. Similarity search for relevant transactions
     let relevantTransactions = await similaritySearch(userId, message, 10);

@@ -22,8 +22,8 @@ exports.addIncome = async (req, res) => {
     });
 
     await newIncome.save();
+    await addTransactionEmbedding(newIncome, "income");
     res.status(200).json(newIncome);
-    addTransactionEmbedding(newIncome, "income").catch(() => {});
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
   }

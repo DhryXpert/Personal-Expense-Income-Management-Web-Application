@@ -35,9 +35,28 @@ const AiChat = () => {
   useEffect(() => {
     if (isSynced.current) return;
     isSynced.current = true;
-    axiosInstance
-      .post(API_PATHS.CHAT.SYNC, {}, { timeout: 60000 })
-      .catch(() => {});
+
+    const runSync = async () => {
+      try {
+        let remaining = 1;
+        while (remaining > 0) {
+          const response = await axiosInstance.post(
+            API_PATHS.CHAT.SYNC,
+            {},
+            { timeout: 30000 }
+          );
+          remaining = response.data.remaining ?? 0;
+          // If no progress is being made, break to prevent infinite loops
+          if (response.data.synced === 0) {
+            break;
+          }
+        }
+      } catch (error) {
+        console.error("Sync error:", error);
+      }
+    };
+
+    runSync();
   }, []);
 
   const handleSend = async () => {

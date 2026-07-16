@@ -22,8 +22,8 @@ exports.addExpense = async (req, res) => {
     });
 
     await newExpense.save();
+    await addTransactionEmbedding(newExpense, "expense");
     res.status(200).json(newExpense);
-    addTransactionEmbedding(newExpense, "expense").catch(() => {});
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
   }
