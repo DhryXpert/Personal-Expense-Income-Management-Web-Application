@@ -9,8 +9,21 @@ const AddIncomeForm = ({ onAddIncome }) => {
     date: "",
     icon: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (key, value) => setIncome({ ...income, [key]: value });
+
+  const handleSubmit = async () => {
+    if (loading) return;
+    setLoading(true);
+    try {
+      await onAddIncome(income);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div>
@@ -46,10 +59,11 @@ const AddIncomeForm = ({ onAddIncome }) => {
       <div className="flex justify-end mt-6">
         <button
           type="button"
-          className="add-btn add-btn-fill"
-          onClick={() => onAddIncome(income)}
+          className="add-btn add-btn-fill disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none"
+          onClick={handleSubmit}
+          disabled={loading}
         >
-          Add Income
+          {loading ? "Adding..." : "Add Income"}
         </button>
       </div>
     </div>

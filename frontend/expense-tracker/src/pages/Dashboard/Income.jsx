@@ -5,6 +5,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import Modal from "../../components/Modal";
 import AddIncomeForm from "../../components/Income/AddIncomeForm";
+import { toast } from "react-hot-toast";
 
 const Income = () => {
   const [incomeDate, setIncomeDate] = useState([]);
@@ -38,7 +39,42 @@ const Income = () => {
   };
 
   // Handle Add Income
-  const handleAddIncome = async (income) => {};
+  const handleAddIncome = async (income) => {
+    const { source, amount, date, icon } = income;
+
+    //Validation Checks
+    if (!source.trim()) {
+      toast.error("Source is required");
+      return;
+    }
+    if (!amount || isNaN(amount) || Number(amount) <= 0) {
+      toast.error("Amount should be a valid number greater than 0.0");
+      return;
+    }
+
+    if (!date) {
+      toast.error("Date is required");
+      return;
+    }
+
+    try {
+      await axiosInstance.post(API_PATHS.INCOME.ADD_INCOME, {
+        source,
+        amount,
+        date,
+        icon,
+      });
+
+      setOpenAddIncomeModel(false);
+      toast.success("Income added successfully");
+      fetchIncomeDetails();
+    } catch (error) {
+      console.log(
+        "Error while adding income",
+        error.response?.data?.message || error.message,
+      );
+    }
+  };
 
   // Delete Income
   const deleteIncome = async (id) => {};
@@ -63,13 +99,15 @@ const Income = () => {
             />
           </div>
         </div>
-        <Modal 
-          isOpen={openAddIncomeModel}
-          onClose={() => setOpenAddIncomeModel(false)}
-          title="Add Income"
-        >
-          <AddIncomeForm onAddIncome={handleAddIncome} />
-        </Modal>
+        {openAddIncomeModel && (
+          <Modal
+            isOpen={openAddIncomeModel}
+            onClose={() => setOpenAddIncomeModel(false)}
+            title="Add Income"
+          >
+            <AddIncomeForm onAddIncome={handleAddIncome} />
+          </Modal>
+        )}
       </div>
     </DashboardLayout>
   );

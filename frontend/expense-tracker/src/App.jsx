@@ -14,6 +14,7 @@ import Expense from "./pages/Dashboard/Expense";
 import AiChat from "./pages/Dashboard/AiChat";
 import UserProvider from "./context/userContext";
 import { ThemeProvider } from "./context/ThemeContext";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
@@ -33,6 +34,14 @@ const App = () => {
             </Routes>
           </Router>
         </div>
+        <Toaster 
+          toastOptions={{
+            className : "",
+            style:{
+              fontSize: "13px",
+            },
+          }}
+          />
       </UserProvider>
     </ThemeProvider>
   );
