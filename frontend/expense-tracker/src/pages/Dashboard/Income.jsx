@@ -6,6 +6,7 @@ import { API_PATHS } from "../../utils/apiPaths";
 import Modal from "../../components/Modal";
 import AddIncomeForm from "../../components/Income/AddIncomeForm";
 import { toast } from "react-hot-toast";
+import IncomeList from "../../components/Income/IncomeList";
 
 const Income = () => {
   const [incomeDate, setIncomeDate] = useState([]);
@@ -77,7 +78,9 @@ const Income = () => {
   };
 
   // Delete Income
-  const deleteIncome = async (id) => {};
+  const deleteIncome = async (id) => {
+    
+  };
 
   // handle download income details
   const handleDownloadIncomeDetails = async () => {};
@@ -98,6 +101,15 @@ const Income = () => {
               onAddIncome={() => setOpenAddIncomeModel(true)}
             />
           </div>
+
+        <IncomeList
+          transactions={incomeDate}
+          onDelete={(id)=>{
+            setOpenDeleteAlert({ show: true, data: id });
+          }}
+          onDownload={handleDownloadIncomeDetails}
+        />
+
         </div>
         {openAddIncomeModel && (
           <Modal
