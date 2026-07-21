@@ -7,9 +7,19 @@ const RecentIncomeWithChart = ({ data, totalIncome }) => {
   const [chartData, setChartData] = useState([]);
 
   const prepareChartData = () => {
-    const dataArr = data?.map((item) => ({
-      name: item?.source,
-      amount: item?.amount,
+    const grouped = {};
+    data?.forEach((item) => {
+      const source = item?.source || "Other";
+      if (grouped[source]) {
+        grouped[source] += item?.amount || 0;
+      } else {
+        grouped[source] = item?.amount || 0;
+      }
+    });
+
+    const dataArr = Object.entries(grouped).map(([name, amount]) => ({
+      name,
+      amount,
     }));
 
     setChartData(dataArr);
