@@ -25,6 +25,22 @@
     background-color: #0f0f14;
     color: #e2e2e8;
   }
+
+  /* ── Custom Scrollbar (Light Mode) ── */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #fcfbfc;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
+  }
 }
 
 .input-box {

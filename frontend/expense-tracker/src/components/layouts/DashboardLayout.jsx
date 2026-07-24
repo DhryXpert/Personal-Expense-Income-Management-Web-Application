@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import SideMenu from "./SideMenu";
 import { useUserAuth } from "../../hooks/useUserAuth";
 
-const DashboardLayout = ({children, activeMenu}) => {
+const DashboardLayout = ({ children, activeMenu }) => {
   useUserAuth();
   const { user } = useContext(UserContext);
   return (

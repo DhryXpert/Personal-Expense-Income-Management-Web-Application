@@ -23,7 +23,7 @@ const CustomBarChart = ({ data }) => {
       return (
         <div className="bg-white shadow-md rounded-lg p-2 border border-gray-300">
           <p className="text-xs font-semibold text-purple-800 mb-1">
-            {data.month || data.category}
+            {data.displayMonth || data.month || data.category}
           </p>
           <p className="text-sm text-gray-600">
             Amount :{" "}
@@ -48,6 +48,7 @@ const CustomBarChart = ({ data }) => {
 
           <XAxis
             dataKey="month"
+            tickFormatter={(value) => value?.split(" • ")[0] || value}
             tick={{ fontSize: 12, fill: "#555" }}
             stroke="none"
           />

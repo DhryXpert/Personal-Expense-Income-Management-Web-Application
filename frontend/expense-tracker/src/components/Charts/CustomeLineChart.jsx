@@ -15,7 +15,10 @@ const CustomLineChart = ({ data }) => {
       return (
         <div className="bg-white shadow-md rounded-lg p-2 border border-gray-300">
           <p className="text-xs font-semibold text-purple-800 mb-1">
-            {payload[0].payload.category || payload[0].payload.source || payload[0].payload.month}
+            {payload[0].payload.category ||
+              payload[0].payload.source ||
+              payload[0].payload.displayMonth ||
+              payload[0].payload.month}
           </p>
           <p className="text-sm text-gray-600">
             Amount:{" "}
@@ -44,6 +47,7 @@ const CustomLineChart = ({ data }) => {
           <CartesianGrid stroke="none" />
           <XAxis
             dataKey="month"
+            tickFormatter={(value) => value?.split(" • ")[0] || value}
             tick={{ fontSize: 12, fill: "#555" }}
             stroke="none"
           />
@@ -51,7 +55,7 @@ const CustomLineChart = ({ data }) => {
           <Tooltip content={<CustomTooltip />} />
 
           <Area
-            type="monotone"
+            type="linear"
             dataKey="amount"
             stroke="#875Cf5"
             fill="url(#incomeGradient)"
