@@ -43,6 +43,7 @@ graph TD
 ```
 
 ### 1. Transaction Event & Embedding Pipeline
+
 Whenever a transaction is created, it is formatted and embedded:
 
 ```mermaid
@@ -74,6 +75,7 @@ sequenceDiagram
 * **Output Dimensionality**: Restricts `gemini-embedding-001` output size to `768` dimensions to match the search index specifications in MongoDB Atlas.
 
 ### 2. RAG Query & Chat Retrieval Pipeline
+
 When a user asks a question in the chat interface:
 
 ```mermaid
@@ -88,10 +90,10 @@ sequenceDiagram
 
     User->>FE: Types "How can I save more?"
     FE->>BE: POST /api/v1/chat/message (Body: message, history)
-    
+  
     BE->>GemE: Embed User Message (768 dimensions)
     GemE-->>BE: Returns Query Vector
-    
+  
     alt Vector Search Success
         BE->>DB: Aggregate $vectorSearch (Filter by userId)
         DB-->>BE: Returns Top Relevant Transactions
@@ -102,7 +104,7 @@ sequenceDiagram
 
     BE->>BE: Calculate statistics (Total Income, Total Expenses, Current Balance)
     BE->>BE: Compile System Prompt (Rules: Currency formatting, strict context-only answers)
-    
+  
     BE->>GemL: Generate Content (System Prompt + History + Context + Query)
     GemL-->>BE: Context-grounded analysis response
     BE-->>FE: HTTP 200 (JSON Reply)
@@ -140,7 +142,7 @@ sequenceDiagram
 ## Project Structure
 
 ```text
-Personal-Expense-Income-Management-Web-Application/
+Zen_Wealth/
 │
 ├── backend/                  # Server-side code
 │   ├── config/               # Database, vectorStore configurations
@@ -167,7 +169,7 @@ Personal-Expense-Income-Management-Web-Application/
 └── frontend/expense-tracker/ # Client-side React application
     ├── src/                  # React source
     │   ├── components/       # Custom components
-    │   ├── pages/            
+    │   ├── pages/          
     │   │   └── Dashboard/
     │   │       ├── AiChat.jsx # AI chat interaction interface page
     │   │       └── ...
@@ -194,14 +196,12 @@ Personal-Expense-Income-Management-Web-Application/
    git clone <repository-url>
    cd Personal-Expense-Income-Management-Web-Application
    ```
-
 2. **Backend Setup:**
 
    ```bash
    cd backend
    npm install
    ```
-
    Create a `.env` file in the `backend` directory with the following variables:
 
    ```env
@@ -210,20 +210,20 @@ Personal-Expense-Income-Management-Web-Application/
    PORT=8000
    GEMINI_API_KEY=<your-google-ai-studio-api-key>
    ```
-
    Start the backend server:
 
    ```bash
    npm run dev
    ```
-
 3. **Frontend Setup:**
    Open a new terminal window:
+
    ```bash
    cd frontend/expense-tracker
    npm install
    ```
    Start the Vite development server:
+
    ```bash
    npm run dev
    ```
