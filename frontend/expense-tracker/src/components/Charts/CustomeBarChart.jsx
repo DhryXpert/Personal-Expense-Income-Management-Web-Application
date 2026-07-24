@@ -21,18 +21,18 @@ const CustomBarChart = ({ data }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
-        <div className="bg-white shadow-md rounded-lg p-2 border border-gray-300">
-          <p className="text-xs font-semibold text-purple-800 mb-1">
+        <div className="bg-white dark:bg-[#1a1a24] shadow-md rounded-lg p-2 border border-gray-300 dark:border-gray-800">
+          <p className="text-xs font-semibold text-purple-800 dark:text-purple-300 mb-1">
             {data.displayMonth || data.month || data.category}
           </p>
-          <p className="text-sm text-gray-600">
-            Amount :{" "}
-            <span className="text-sm font-medium text-gray-900">
-              {data.amount}
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Amount:{" "}
+            <span className="text-sm font-medium text-gray-900 dark:text-white">
+              ₹{data.amount}
             </span>
           </p>
           {data.source && (
-            <p className="text-xs text-gray-500">Source: {data.source}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">Source: {data.source}</p>
           )}
         </div>
       );
