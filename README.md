@@ -1,4 +1,4 @@
-# Personal Expense & Income Management Web Application
+# Zen Wealth - RAG powered Personal Expense & Income Management Web Application
 
 ## Project Overview
 
